@@ -1,4 +1,4 @@
-
+var dataBtnValue = "";
 
 //Sets current date
 var setCurrentDate = function(){
@@ -42,27 +42,53 @@ var setCurrentDate = function(){
     
 }
 
+
+//listener for save button click
 $(".target").click(function(event){
+    // save that click item to var
     var event = event.target;
+    //define save button 
     var saveBtn = "saveBtn width-100 h-100 align-left";
+    // define what the lock is
     var lock = $("span[class=material-symbols-outline]");
+    //find the even targets class list
     var eventTarget = event.classList.value;
-    console.log(eventTarget)
     
-    if(eventTarget === saveBtn){
-        var dataBtnValue = event.attributes[1].value;
-        var textAText = $(`textarea[data-txtArea=${dataBtnValue}]`);
-        textAText[0].textContent = "Hello My Friend";
-       
+    // compare event target class list to save button or lock
+    if(eventTarget === saveBtn || lock){
+         dataBtnValue = event.attributes[1].value;
+        var textAText = $(`textarea[data-txtArea=${dataBtnValue}]`).val();
         
-        console.log(textAText);
-        
-        var textAreaText = event.parentElement.parentElement.children[1].children.textArea.value;
-        
-        if(textAreaText){
-            localStorage.setItem("information",JSON.stringify(textAreaText));
+        if(textAText){
+            localStorage.setItem(`data-textArea=${dataBtnValue}`,JSON.stringify(textAText));
+        }
+        else{
+            return false;
         }
     }
 })
 
+var checkForSaves = function(){
+    var testTextArea = $("textarea#textArea");
+    
+    //var savedData = localStorage.getItem()
+    //var storageItem = localStorage.getItem(`data-textArea=${dataValue}`);
+    //console.log(JSON.parse(storageItem));
+
+    console.log(testTextArea[0]);
+
+    // loop through text areas to see if there is saved data
+    for(var i = 0; i < 9; i++){
+        var dataValue = testTextArea[i].attributes[1].nodeValue;
+        var storageItem = localStorage.getItem(`data-textArea=${dataValue}`);
+        if(storageItem){
+            testTextArea[i].textContent = JSON.parse(storageItem);
+
+        }
+
+    }
+    
+}
+
+checkForSaves();
 setCurrentDate();
