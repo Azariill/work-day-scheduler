@@ -50,10 +50,15 @@ $(".target").click(function(event){
     console.log(eventTarget)
     
     if(eventTarget === saveBtn){
+        var dataBtnValue = event.attributes[1].value;
+        var textAText = $(`textarea[data-txtArea=${dataBtnValue}]`);
+        textAText[0].textContent = "Hello My Friend";
        
         
+        console.log(textAText);
+        
         var textAreaText = event.parentElement.parentElement.children[1].children.textArea.value;
-        console.log(textAreaText);
+        
         if(textAreaText){
             localStorage.setItem("information",JSON.stringify(textAreaText));
         }

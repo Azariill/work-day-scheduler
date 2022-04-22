@@ -68,6 +68,7 @@ textarea{
   background-color: #06AED5;
   color: white;
   margin-left: -15px;
+  z-index: 0;
 }
 
 .saveBtn i:hover {
@@ -87,8 +88,9 @@ textarea{
   margin-left: -13px;
 }
 
-
-
+.target{
+  z-index: 1;
+}
 
 
 
