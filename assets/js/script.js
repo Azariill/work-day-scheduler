@@ -50,9 +50,10 @@ $(".target").click(function(event){
     console.log(eventTarget)
     
     if(eventTarget === saveBtn){
-        var testVar = event.$("textarea:first-of-type");
-        console.log(testVar)
+       
+        
         var textAreaText = event.parentElement.parentElement.children[1].children.textArea.value;
+        console.log(textAreaText);
         if(textAreaText){
             localStorage.setItem("information",JSON.stringify(textAreaText));
         }
